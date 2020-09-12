@@ -143,4 +143,23 @@ var aigisWidget = aigisWidget || {};
       +'</td><td>'+gacha.unitname
       +'</td></tr>\r\n';
   }
+  aigisWidget.whiteArmorEx = function() {
+    return applySarriette(8000);
+  }
+  aigisWidget.happyEx = function() {
+    // 念のためデフォルトで青／白の経験値を返しておく
+    var ex = 19000;
+    var rarity = $('input.rarity:checked').val();
+    if (rarity == 'silver') ex = 4000;
+    if (rarity == 'gold') ex = 18000;
+    if (rarity == 'platinum') ex = 19000;
+    if (rarity == 'sapphire') ex = 19000;
+    if (rarity == 'black') ex = 20000;
+    return applySarriette(ex);
+  }
+  function applySarriette(val) {
+    if ($('#has-sarriette').prop('checked'))
+      val = val * 1.1;
+    return val;
+  }
 })();

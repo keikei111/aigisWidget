@@ -26,7 +26,7 @@ $(window).load(function () {
     });
     $('body').animate({
       'top'     : '-60px',
-      'left'    : '-44px'
+      'left'    : '-66px'
     },500);
   },500);
 

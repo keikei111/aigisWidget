@@ -5,7 +5,7 @@ var unitExp = unitExp || {};
 (function() {
   var db = new aigisWidget.aigisdb();
   var exp = db.getUnitexp();
-  var grows = ['normal','cc','awake'];
+  var grows = ['normal','cc','awake', 'awake2'];
 
   unitExp.getMaxLevel = function(rarity, grow) {
     return exp.meta[rarity][grow];

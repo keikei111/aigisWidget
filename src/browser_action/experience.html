@@ -334,6 +334,10 @@
 
           <div class="controls col-sm-4 has-pretty-child">
             <div class="clearfix prettyradio labelright blue">
+              <input type="radio" name="grow" id="grow-awake2" class="prettyCheckable form-control grow" value="awake2" data-label="<img class='grow-icon' src='../img/awake2.png'>第二覚醒済み" data-customClass="grow-div">
+            </div>
+            <br>
+            <div class="clearfix prettyradio labelright blue">
               <input type="radio" name="grow" id="grow-awake" class="prettyCheckable form-control grow" value="awake" data-label="<img class='grow-icon' src='../img/awake.png'>覚醒済み" data-customClass="grow-div">
             </div>
             <br>
@@ -347,14 +351,19 @@
             <hr>
           </div>
 
-          <div class="controls col-sm-2"></div>
+          <div class="controls col-sm2">
+          </div>
         </div>
 
         <div class="form-group">
+          <label class="control-label col-sm-2"></label>
+          <div class="controls col-sm-10">
+              <input type="checkbox" id="has-sarriette" value="1" checked><label for='has-sarriette'>サリエットがいる</label>
+          </div>
           <label class="control-label col-sm-2">レベル</label>
 
           <div class="controls col-sm-3">
-            <input id="level" type="text" value="30" name="level"><br>
+            <input id="level" type="text" value="65" name="level"><br>
             <input id="levelslider" type="text" class="config-slider" data-slider-id="levelslider-div" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="1">
           </div>
 
@@ -369,7 +378,7 @@
           <label class="control-label col-sm-2">次のレベルまで</label>
 
           <div class="controls col-sm-4">
-            <input id="nextexp" type="text" value="100" name="nextexp"><br>
+            <input id="nextexp" type="text" value="573" name="nextexp"><br>
             <input id="nextexpslider" type="text" class="config-slider" data-slider-id="nextexpslider-div" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="100">
           </div>
 
@@ -427,11 +436,11 @@
                       <div class="line-border3">余り：<span id="maxexpPlt8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
-                  <tr><th>牧場産白8倍煮込み<div class="sml">※未CCレベル15（経験値：698）想定</div></th>
+                  <tr><th>小祝福聖霊</th>
                     <td>
-                      <div class="line-border2"><span id="maxexpFrm8" class="emp"></span>体</div>
-                      <div id="maxexpFrm8-icon"></div>
-                      <div class="line-border3">余り：<span id="maxexpFrm8rest" class="emp"></span>exp</div>
+                      <div class="line-border2"><span id="maxexpHappy8" class="emp"></span>体</div>
+                      <div id="maxexpHappy8-icon"></div>
+                      <div class="line-border3">余り：<span id="maxexpHappy8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
                 </table>
@@ -447,11 +456,11 @@
                       <div class="line-border3">余り：<span id="maxawkexpPlt8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
-                  <tr><th>牧場産白8倍煮込み<div class="sml">※未CCレベル15（経験値：698）想定</div></th>
+                  <tr><th>小祝福聖霊</th>
                     <td>
-                      <div class="line-border2"><span id="maxawkexpFrm8" class="emp"></span>体</div>
-                      <div id="maxawkexpFrm8-icon"></div>
-                      <div class="line-border3">余り：<span id="maxawkexpFrm8rest" class="emp"></span>exp</div>
+                      <div class="line-border2"><span id="maxawkexpHappy8" class="emp"></span>体</div>
+                      <div id="maxawkexpHappy8-icon"></div>
+                      <div class="line-border3">余り：<span id="maxawkexpHappy8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
                 </table>
@@ -467,11 +476,11 @@
                       <div class="line-border3">余り：<span id="cc30expPlt8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
-                  <tr><th>牧場産白8倍煮込み<div class="sml">※未CCレベル15（経験値：698）想定</div></th>
+                  <tr><th>小祝福聖霊</th>
                     <td>
-                      <div class="line-border2"><span id="cc30expFrm8" class="emp"></span>体</div>
-                      <div id="cc30expFrm8-icon"></div>
-                      <div class="line-border3">余り：<span id="cc30expFrm8rest" class="emp"></span>exp</div>
+                      <div class="line-border2"><span id="cc30expHappy8" class="emp"></span>体</div>
+                      <div id="cc30expHappy8-icon"></div>
+                      <div class="line-border3">余り：<span id="cc30expHappy8rest" class="emp"></span>exp</div>
                     </td>
                   </tr>
                 </table>

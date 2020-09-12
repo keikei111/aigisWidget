@@ -4,7 +4,7 @@
 $(function() {
   ga('send', 'pageview', window.location.toString());
   $('#rarity-black').prettyCheckable('check');
-  $('#grow-cc').prettyCheckable('check');
+  $('#grow-awake2').prettyCheckable('check');
 
   $(document).on('change', 'input:radio.rarity', function (eo) {
     $('.rarity-div').removeClass('rarity-select');
@@ -12,15 +12,15 @@ $(function() {
 
     var rarity = $('input:radio.rarity:checked').val();
     if (rarity == 'silver') {
-      $('#grow-awake').prettyCheckable('disable');
+      $('.awakable, #grow-awake2').prettyCheckable('disable');
 
       var grow = $('input:radio.grow:checked').val();
-      if (grow == 'awake') {
+      if (grow == 'awake' || grow == 'awake2') {
         $('#grow-cc').prettyCheckable('check');
         $('#grow-cc').change();
       }
     } else {
-      $('#grow-awake').prettyCheckable('enable');
+      $('#grow-awake, #grow-awake2').prettyCheckable('enable');
     }
     getExperienceTable();
   });
@@ -28,6 +28,10 @@ $(function() {
   $(document).on('change', 'input:radio.grow', function (eo) {
     $('.grow-div').removeClass('grow-select');
     $(eo.target).parent('.grow-div').addClass('grow-select');
+    getExperienceTable();
+  });
+
+  $(document).on('change', '#has-sarriette', function (eo) {
     getExperienceTable();
   });
 
@@ -57,9 +61,8 @@ $(function() {
 
   var timer = false;
   function getExperienceTable() {
-    $('#maxexpPlt8-icon').hide(500);
-    $('#maxawkexpPlt8-icon').hide(500);
-    $('#cc30expPlt8-icon').hide(500);
+    $('#maxexpPlt8-icon, #maxawkexpPlt8-icon, #cc30expPlt8-icon').hide(500);
+    $('#maxexpHappy8-icon, #maxawkexpHappy8-icon, #cc30expHappy8-icon').hide(500);
     if (timer !== false) {
       clearTimeout(timer);
     }
@@ -92,9 +95,10 @@ $(function() {
       $('#maxexperience').text(maxexp.toLocaleString());
       $('#maxexpPlt8').text(getPlatinumArmorExp(maxexp));
       getPlatinumArmorIcon($('#maxexpPlt8-icon'), getPlatinumArmorExp(maxexp));
-      $('#maxexpFrm8').text(getFarmUnitExp(maxexp));
+      getHappyIcon($('#maxexpHappy8-icon'), getFarmUnitExp(maxexp));
+      $('#maxexpHappy8').text(getFarmUnitExp(maxexp));
       $('#maxexpPlt8rest').text(getPlatinumArmorExpRest(maxexp));
-      $('#maxexpFrm8rest').text(getFarmUnitExpRest(maxexp));
+      $('#maxexpHappy8rest').text(getFarmUnitExpRest(maxexp));
 
       //現在の取得済みユニット経験値
       var nlvl = 1;
@@ -107,7 +111,7 @@ $(function() {
       $('#experiencediff').text(($('#nowexperience').text() - Number($('#calc').val())));
 
       //覚醒最大レベル
-      var maxgrow = 'awake';
+      var maxgrow = 'awake2';
       if (rarity == 'silver') {
         maxgrow = 'cc';
       }
@@ -116,9 +120,10 @@ $(function() {
       $('#maxawakeexperience').text(maxawkexp.toLocaleString());
       $('#maxawkexpPlt8').text(getPlatinumArmorExp(maxawkexp));
       getPlatinumArmorIcon($('#maxawkexpPlt8-icon'), getPlatinumArmorExp(maxawkexp));
-      $('#maxawkexpFrm8').text(getFarmUnitExp(maxawkexp));
+      getHappyIcon($('#maxawkexpHappy8-icon'), getFarmUnitExp(maxawkexp));
+      $('#maxawkexpHappy8').text(getFarmUnitExp(maxawkexp));
       $('#maxawkexpPlt8rest').text(getPlatinumArmorExpRest(maxawkexp));
-      $('#maxawkexpFrm8rest').text(getFarmUnitExpRest(maxawkexp));
+      $('#maxawkexpHappy8rest').text(getFarmUnitExpRest(maxawkexp));
 
       //30CC
       if ( (grow == 'normal') && ($('#level').val() < 30) ) {
@@ -127,24 +132,24 @@ $(function() {
         $('#cc30experience').text(cc30exp.toLocaleString());
         $('#cc30expPlt8').text(getPlatinumArmorExp(cc30exp));
         getPlatinumArmorIcon($('#cc30expPlt8-icon'), getPlatinumArmorExp(cc30exp));
-        $('#cc30expFrm8').text(getFarmUnitExp(cc30exp));
+        getHappyIcon($('#cc30expHappy8-icon'), getFarmUnitExp(cc30exp));
+        $('#cc30expHappy8').text(getFarmUnitExp(cc30exp));
         $('#cc30expPlt8rest').text(getPlatinumArmorExpRest(cc30exp));
-        $('#cc30expFrm8rest').text(getFarmUnitExpRest(cc30exp));
+        $('#cc30expHappy8rest').text(getFarmUnitExpRest(cc30exp));
       } else {
         $('#cc30-pattern').hide(500);
       }
-      $('#maxexpPlt8-icon').show(500);
-      $('#maxawkexpPlt8-icon').show(500);
-      $('#cc30expPlt8-icon').show(500);
+      $('#maxexpPlt8-icon, #maxawkexpPlt8-icon, #cc30expPlt8-icon').show(500);
+      $('#maxexpHappy8-icon, #maxawkexpHappy8-icon, #cc30expHappy8-icon').show(500);
     }, 500);
   }
 
   function getPlatinumArmorExp(exp) {
-    return Math.floor(exp / 8000);
+    return Math.floor(exp / aigisWidget.whiteArmorEx());
   }
 
   function getPlatinumArmorExpRest(exp) {
-    return (exp % 8000);
+    return (exp % aigisWidget.whiteArmorEx());
   }
 
   function getPlatinumArmorIcon(obj, cnt) {
@@ -155,12 +160,29 @@ $(function() {
     return ;
   }
 
+  function getHappyIcon(obj, cnt) {
+    var img = '';
+    var rarity = $('input.rarity:checked').val();
+    if (rarity == 'silver') img = '../img/amour.png';
+    if (rarity == 'gold') img = '../img/alegria.png';
+    if (rarity == 'platinum') img = '../img/freude.png';
+    if (rarity == 'black') img = '../img/farah.png';
+ 
+    obj.empty();
+    if (!img) return;
+
+    for (var i = 0; i < cnt; i++) {
+      obj.append($('<img>').attr('src', img));
+    }
+    return ;
+  }
+
   function getFarmUnitExp(exp) {
-    return Math.floor(exp / (698 * 8));
+    return Math.floor(exp / aigisWidget.happyEx());
   }
 
   function getFarmUnitExpRest(exp) {
-    return (exp % (698 * 8));
+    return (exp % aigisWidget.happyEx());
   }
 
   var inputs = $('input.prettyCheckable:not(#TestDisabled)').each(function () {
@@ -197,5 +219,5 @@ $(function() {
   });
 
   $('#rarity-black').change();
-  $('#grow-cc').change();
+  $('#grow-awake2').change();
 });
