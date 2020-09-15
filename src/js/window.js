@@ -1,6 +1,7 @@
 $(window).load(function () {
   var zoomEnable = false;
   var closeAlert = true;
+  var r18 = !/\/aigisc\//.test(location.href);
 
   setTimeout(function() {
     chrome.runtime.sendMessage({type: constants.msg.config
@@ -10,7 +11,7 @@ $(window).load(function () {
         ,'closeAlert'
       ]
     }, function(response) {
-      if (response.r18) {
+      if (r18) {
         $('title').text(message.fm.appnamer18);
       } else {
         $('title').text(message.fm.appname);
@@ -25,8 +26,8 @@ $(window).load(function () {
       'cursor': 'default'
     });
     $('body').animate({
-      'top'     : '-60px',
-      'left'    : '-66px'
+      'top'     : '-61px',
+      'left'    : r18 ? '-63px' : '-66px'
     },500);
   },500);
 
