@@ -40,7 +40,7 @@ $(function() {
     getExperienceTable();
   });
 
-  $(document).on('slide', '#levelslider', function (eo) {
+  $(document).on('slideStop', '#levelslider', function (eo) {
     $("#level").val(eo.value);
     getExperienceTable();
   });
@@ -50,7 +50,7 @@ $(function() {
     getExperienceTable();
   });
 
-  $(document).on('slide', '#nextexpslider', function (eo) {
+  $(document).on('slideStop', '#nextexpslider', function (eo) {
     $("#nextexp").val(eo.value);
     getExperienceTable();
   });
