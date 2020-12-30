@@ -26,8 +26,8 @@ $(window).load(function () {
       'cursor': 'default'
     });
     $('body').animate({
-      'top'     : '-61px',
-      'left'    : r18 ? '-63px' : '-66px'
+      'top'     : '-80px',
+      'left'    : r18 ? '-63px' : '-63px'
     },500);
   },500);
 
